@@ -23,7 +23,6 @@ class MainNavigationController: UINavigationController {
     
     // MARK: - Helpers
     func configureNavigationController(){
-        view.backgroundColor = .systemPurple
         let mainController = MainCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
         pushViewController(mainController, animated: true)
         
