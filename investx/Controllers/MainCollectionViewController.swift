@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import IQKeyboardManagerSwift
 
 
 private let reuseIdentifier = "SearchCellItem"
@@ -16,8 +17,7 @@ class MainCollectionViewController : UICollectionViewController {
     
     private lazy var searchBarView : UISearchController = {
         let sc = UISearchController(searchResultsController: nil)
-        sc.searchResultsUpdater = self
-        sc.delegate = self
+        sc.searchBar.delegate = self
         sc.obscuresBackgroundDuringPresentation = false
         sc.searchBar.placeholder = "Informe um ticker ou nome"
         sc.searchBar.autocapitalizationType = .allCharacters
@@ -54,28 +54,29 @@ class MainCollectionViewController : UICollectionViewController {
         
         collectionView.backgroundColor = .white
         navigationItem.searchController = searchBarView
-        searchBarView.delegate = self
-        searchBarView.searchResultsUpdater = self
         definesPresentationContext = false
         collectionView.register(SearchCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
-    
-    
-    
-    
-}
-extension MainCollectionViewController : UISearchControllerDelegate {
-    
+  
 }
 
-// MARK: - UISearchResultsUpdating
 
-extension MainCollectionViewController : UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController){
-        guard let searchText = self.searchBarView.searchBar.text else { return }
-        print("DEBUG: \(searchText)")
+
+
+// MARK: - UISearchBarDelegate
+
+extension MainCollectionViewController : UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchQuery = searchBarView.searchBar.text , !searchQuery.isEmpty else { return }
+        
+        
+        print("Should search for: \(searchQuery)")
+        //apiService.fetchSymbolsPublisher(keywords: searchQuery)
     }
 }
+
+
+
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
