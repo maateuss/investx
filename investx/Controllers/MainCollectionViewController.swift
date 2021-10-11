@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Combine
+
 
 private let reuseIdentifier = "SearchCellItem"
 
@@ -22,13 +24,29 @@ class MainCollectionViewController : UICollectionViewController {
         return sc
     }()
     
+    private let apiService = APIService()
+    private var subscribers = Set<AnyCancellable>()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        performSearch()
     }
     
+    // MARK: - API
+    
+    func performSearch(){
+        apiService.fetchSymbolsPublisher(keywords: "PETR").sink { (completion) in
+            switch completion {
+                case .failure(let error): print(error.localizedDescription)
+                case .finished: break
+            }
+        } receiveValue: { (searchResults) in
+            print(searchResults)
+        }.store(in: &subscribers)
+
+    }
     
     // MARK: - Helpers
     
@@ -40,9 +58,10 @@ class MainCollectionViewController : UICollectionViewController {
         searchBarView.searchResultsUpdater = self
         definesPresentationContext = false
         collectionView.register(SearchCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        
-        
     }
+    
+    
+    
     
 }
 extension MainCollectionViewController : UISearchControllerDelegate {
