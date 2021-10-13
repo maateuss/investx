@@ -82,19 +82,13 @@ class MainCollectionViewController : UICollectionViewController {
                 showLoad(false)
             }.store(in: &self.subscribers)
         }.store(in: &subscribers)
-        
-        
-        
     }
         
     // MARK: - Helpers
     
     func configureUI(){
         
-        navigationItem.title = "Search"
-        navigationItem.largeTitleDisplayMode = .always
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
+        configureNavigationBar(title: "Search")
         
         
         collectionView.backgroundColor = .white
@@ -144,6 +138,17 @@ extension MainCollectionViewController : UICollectionViewDelegateFlowLayout {
         let height : CGFloat = 80
         
         return CGSize(width: width, height: height)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let resultCellSelected = results[indexPath.row]
+        
+        print(resultCellSelected.ticker)
+        
+        let detailView = EquityDetailViewController()
+        detailView.equity = results[indexPath.row]
+        navigationController?.pushViewController(detailView, animated: true)
+        
     }
 }
 

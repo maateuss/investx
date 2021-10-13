@@ -20,7 +20,7 @@ class SearchCell : UICollectionViewCell {
         let label = UILabel()
         label.text = "BA"
         label.textColor = .black
-        label.font = UIFont(name: "AvenirNext-DemiBold", size: 18)
+        label.font = UIFont(name: FontStyle.demiBold.rawValue, size: 18)
         return label
     }()
     
@@ -30,7 +30,7 @@ class SearchCell : UICollectionViewCell {
         label.textColor = .black
         label.textAlignment = .right
         label.numberOfLines = 0
-        label.font = UIFont(name: "AvenirNext-Regular", size: 16)
+        label.font = UIFont(name: FontStyle.regular.rawValue, size: 16)
         return label
     }()
     
@@ -38,7 +38,7 @@ class SearchCell : UICollectionViewCell {
         let label = UILabel()
         label.text = "usa"
         label.textColor = .lightGray
-        label.font = UIFont(name: "AvenirNext-Regular", size: 14)
+        label.font = UIFont(name: FontStyle.regular.rawValue, size: 14)
         return label
     }()
     

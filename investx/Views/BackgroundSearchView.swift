@@ -24,7 +24,7 @@ class BackgroundSearchView : UIView {
         let label = UILabel()
         label.numberOfLines = 0
         label.text = "Search for companies to calculate potential returns via DCA indicator"
-        label.font = UIFont(name: "AvenirNext-Medium", size: 14)
+        label.font = UIFont(name: FontStyle.medium.rawValue, size: 14)
         label.textAlignment = .center
         return label
     }()

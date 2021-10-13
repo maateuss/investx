@@ -43,6 +43,13 @@ extension UILabel {
 extension UIViewController {
     static let hud = JGProgressHUD(style: .dark)
     
+    func configureNavigationBar(title: String = ""){
+        navigationItem.title = title
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
+    }
+    
     func showLoad(_ show: Bool){
         view.endEditing(true)
         if show {
