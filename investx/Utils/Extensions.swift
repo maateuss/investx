@@ -168,5 +168,17 @@ extension UIView {
     }
 }
 
-
+extension Date {
+    
+    enum formatterErrors : Error {
+        case InvalidFormat
+    }
+    
+    func fromString(stringDate:String, stringFormat:String = "dd/MM/yyyy") throws -> Date{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = stringFormat
+        guard let date =  dateFormatter.date(from: stringDate) else { throw formatterErrors.InvalidFormat }
+        return date
+    }
+}
 
