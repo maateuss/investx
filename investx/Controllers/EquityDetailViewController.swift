@@ -189,7 +189,8 @@ class EquityDetailViewController : UIViewController {
                 break
             }
         } receiveValue: { data in
-            let _ = data.timeSeries.map({print($0)})
+            let monthlyData = data.getSortedMonthInfos()
+            monthlyData.map({month in print("\(equity.ticker) date: \(month.date) adj open: \(month.open) adj close: \(month.close)")})
         }.store(in: &subscribers)
     }
     
